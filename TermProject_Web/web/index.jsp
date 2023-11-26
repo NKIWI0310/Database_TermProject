@@ -11,6 +11,8 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+    <script>
+      location.href = 'login.jsp' //로그인 화면으로 이동
+    </script>
   </body>
 </html>
