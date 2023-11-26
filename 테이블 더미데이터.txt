@@ -1,44 +1,44 @@
 -- 더미 User 데이터 삽입
 INSERT INTO User (UserID, Name, Email, PhoneNum)
 VALUES
-(1, '홍길동', 'hong.gil.dong@example.com', '010-1234-5678'),
-(2, '김철수', 'kim.cheol.su@example.com', '010-9876-5432'),
-(3, '이영희', 'lee.young.hee@example.com', '010-5555-1234'),
-(4, '박민수', 'park.min.su@example.com', '010-7777-8888'),
-(5, '정은지', 'jeong.eun.ji@example.com', '010-1111-2222'),
-(6, '이재환', 'lee.jae.hwan@example.com', '010-4444-5555'),
-(7, '김수현', 'kim.su.hyeon@example.com', '010-6666-7777'),
-(8, '한지민', 'han.ji.min@example.com', '010-9999-0000'),
-(9, '손예진', 'son.ye.jin@example.com', '010-2222-3333'),
-(10, '이준호', 'lee.jun.ho@example.com', '010-8888-9999');
+(1, 'John Doe', 'john.doe@example.com', '123-456-7890'),
+(2, 'Jane Smith', 'jane.smith@example.com', '987-654-3210'),
+(3, 'Alice Johnson', 'alice.johnson@example.com', '555-123-4567'),
+(4, 'Bob Miller', 'bob.miller@example.com', '777-888-9999'),
+(5, 'Eva Davis', 'eva.davis@example.com', '111-222-3333'),
+(6, 'Michael Lee', 'michael.lee@example.com', '444-555-6666'),
+(7, 'Sophia Brown', 'sophia.brown@example.com', '666-777-8888'),
+(8, 'William Wilson', 'william.wilson@example.com', '999-000-1111'),
+(9, 'Olivia Taylor', 'olivia.taylor@example.com', '222-333-4444'),
+(10, 'Daniel White', 'daniel.white@example.com', '888-999-0000');
 
 -- 더미 Host 데이터 삽입
 INSERT INTO Host (HostID, Name, Email, PhoneNum)
 VALUES
-(1, '호스트1', 'host1@example.com', '010-1111-1111'),
-(2, '호스트2', 'host2@example.com', '010-2222-2222'),
-(3, '호스트3', 'host3@example.com', '010-3333-3333'),
-(4, '호스트4', 'host4@example.com', '010-4444-4444'),
-(5, '호스트5', 'host5@example.com', '010-5555-5555'),
-(6, '호스트6', 'host6@example.com', '010-6666-6666'),
-(7, '호스트7', 'host7@example.com', '010-7777-7777'),
-(8, '호스트8', 'host8@example.com', '010-8888-8888'),
-(9, '호스트9', 'host9@example.com', '010-9999-9999'),
-(10, '호스트10', 'host10@example.com', '010-0000-0000');
+(1, 'Host1', 'host1@example.com', '111-111-1111'),
+(2, 'Host2', 'host2@example.com', '222-222-2222'),
+(3, 'Host3', 'host3@example.com', '333-333-3333'),
+(4, 'Host4', 'host4@example.com', '444-444-4444'),
+(5, 'Host5', 'host5@example.com', '555-555-5555'),
+(6, 'Host6', 'host6@example.com', '666-666-6666'),
+(7, 'Host7', 'host7@example.com', '777-777-7777'),
+(8, 'Host8', 'host8@example.com', '888-888-8888'),
+(9, 'Host9', 'host9@example.com', '999-999-9999'),
+(10, 'Host10', 'host10@example.com', '000-000-0000');
 
 -- 더미 Room 데이터 삽입
 INSERT INTO Room (RoomID, Name, Location, HostID, Room_size, Room_Price, Room_Shape)
 VALUES
-(1, '룸A', '충북대 서문', 1, 200, 100, '원룸'),
-(2, '룸B', '충북대 중문', 2, 150, 80, '투룸'),
-(3, '룸C', '충북대 중문', 3, 180, 120, '원룸'),
-(4, '룸D', '충북대 중문', 4, 220, 150, '아파트'),
-(5, '룸E', '충북대 중문', 5, 250, 200, '원룸'),
-(6, '룸F', '충북대 후문', 6, 170, 90, '투룸'),
-(7, '룸G', '충북대 후문', 7, 200, 110, '투룸'),
-(8, '룸H', '충북대 서문', 8, 190, 130, '원룸'),
-(9, '룸I', '충북대 서문', 9, 210, 180, '투룸'),
-(10, '룸J', '충북대 서문', 10, 240, 160, '쓰리룸');
+(1, 'RoomA', 'City Center', 1, 200, 100, 'Square'),
+(2, 'RoomB', 'Suburb', 2, 150, 80, 'Rectangle'),
+(3, 'RoomC', 'Downtown', 3, 180, 120, 'Circle'),
+(4, 'RoomD', 'Beachfront', 4, 220, 150, 'Triangle'),
+(5, 'RoomE', 'Mountain View', 5, 250, 200, 'Hexagon'),
+(6, 'RoomF', 'Lakeside', 6, 170, 90, 'Oval'),
+(7, 'RoomG', 'Rural Area', 7, 200, 110, 'Rectangle'),
+(8, 'RoomH', 'Parkside', 8, 190, 130, 'Square'),
+(9, 'RoomI', 'Hilltop', 9, 210, 180, 'Circle'),
+(10, 'RoomJ', 'Forest Retreat', 10, 240, 160, 'Triangle');
 
 -- 더미 Contract 데이터 삽입
 INSERT INTO Contract (ContractID, UserID, HostID, ContractDate, Price, Duration, Start_time, End_time)
@@ -57,41 +57,41 @@ VALUES
 -- 더미 Bill 데이터 삽입
 INSERT INTO Bill (BillID, Date, Price, UserID, ContractID, Status, PayMethod)
 VALUES
-(1, '2023-01-15', 120, 1, 1, '결제 완료', '신용카드'),
-(2, '2023-02-16', 90, 2, 2, '미결제', 'PayPal'),
-(3, '2023-03-21', 150, 3, 3, '결제 완료', '신용카드'),
-(4, '2023-04-26', 200, 4, 4, '미결제', 'PayPal'),
-(5, '2023-05-19', 180, 5, 5, '결제 완료', '신용카드'),
-(6, '2023-06-13', 130, 6, 6, '미결제', 'PayPal'),
-(7, '2023-07-11', 110, 7, 7, '결제 완료', '신용카드'),
-(8, '2023-08-23', 170, 8, 8, '미결제', 'PayPal'),
-(9, '2023-09-15', 140, 9, 9, '결제 완료', '신용카드'),
-(10, '2023-10-17', 160, 10, 10, '미결제', 'PayPal');
+(1, '2023-01-15', 120, 1, 1, 'Paid', 'Credit Card'),
+(2, '2023-02-16', 90, 2, 2, 'Pending', 'PayPal'),
+(3, '2023-03-21', 150, 3, 3, 'Paid', 'Credit Card'),
+(4, '2023-04-26', 200, 4, 4, 'Pending', 'PayPal'),
+(5, '2023-05-19', 180, 5, 5, 'Paid', 'Credit Card'),
+(6, '2023-06-13', 130, 6, 6, 'Pending', 'PayPal'),
+(7, '2023-07-11', 110, 7, 7, 'Paid', 'Credit Card'),
+(8, '2023-08-23', 170, 8, 8, 'Pending', 'PayPal'),
+(9, '2023-09-15', 140, 9, 9, 'Paid', 'Credit Card'),
+(10, '2023-10-17', 160, 10, 10, 'Pending', 'PayPal');
 
 -- 더미 Message 데이터 삽입
 INSERT INTO Message (MessageID, UserID, HostID, Content, MessageTime)
 VALUES
-(1, 1, 1, '안녕하세요. RoomA 예약에 관심이 있습니다.', '2023-01-05 08:30:00'),
-(2, 2, 2, '안녕하세요. RoomB 주말에 예약 가능한가요?', '2023-02-10 12:45:00'),
-(3, 3, 3, '안녕하세요. RoomC에 대해 문의드립니다.', '2023-03-15 16:20:00'),
-(4, 4, 4, '안녕하세요 Host4, RoomD에 대해 더 많은 정보를 제공해 주실 수 있나요?', '2023-04-20 09:10:00'),
-(5, 5, 5, '안녕하세요. RoomE를 1주일 동안 예약하고 싶습니다.', '2023-05-25 14:30:00'),
-(6, 6, 6, '안녕하세요 Host6, RoomF 주말에 예약 가능한가요?', '2023-06-30 18:05:00'),
-(7, 7, 7, '안녕하세요. RoomG에 관심이 있습니다. 세부 사항을 논의할 수 있을까요?', '2023-07-30 20:45:00'),
-(8, 8, 8, '안녕하세요. 가족 휴가로 RoomH 예약하고 싶습니다.', '2023-08-10 22:15:00'),
-(9, 9, 9, '안녕하세요 Host9, RoomI에 대해 더 많은 정보를 알려주실 수 있나요?', '2023-09-22 11:50:00'),
-(10, 10, 10, '안녕하세요. 특별한 날을 기념하기 위해 RoomJ 예약에 관심이 있습니다.', '2023-10-05 10:00:00');
+(1, 1, 1, 'Hello, I am interested in booking RoomA.', '2023-01-05 08:30:00'),
+(2, 2, 2, 'Hi, is RoomB available for the weekend?', '2023-02-10 12:45:00'),
+(3, 3, 3, 'Greetings! I would like to inquire about RoomC.', '2023-03-15 16:20:00'),
+(4, 4, 4, 'Hello Host4, can you provide more details about RoomD?', '2023-04-20 09:10:00'),
+(5, 5, 5, 'Hi, I'm interested in booking RoomE for a week.', '2023-05-25 14:30:00'),
+(6, 6, 6, 'Hello Host6, is RoomF available for the upcoming weekend?', '2023-06-30 18:05:00'),
+(7, 7, 7, 'Hi, I'm interested in RoomG. Can we discuss the details?', '2023-07-30 20:45:00'),
+(8, 8, 8, 'Greetings! I would like to book RoomH for a family vacation.', '2023-08-10 22:15:00'),
+(9, 9, 9, 'Hello Host9, can you provide more information about RoomI?', '2023-09-22 11:50:00'),
+(10, 10, 10, 'Hi, I'm interested in booking RoomJ for a special occasion.', '2023-10-05 10:00:00');
 
 -- 더미 Review 데이터 삽입
 INSERT INTO Review (ReviewID, UserID, RoomID, Content, Date)
 VALUES
-(1, 1, 1, '좋은 방과 훌륭한 위치!', '2023-01-31'),
-(2, 2, 2, '깨끗하고 편안합니다. 숙박을 즐겼어요.', '2023-02-16'),
-(3, 3, 3, 'RoomC는 기대를 뛰어넘었습니다. 환상적인 호스트!', '2023-03-21'),
-(4, 4, 4, 'RoomD는 숨막히는 전망이었습니다. 강력 추천!', '2023-04-26'),
-(5, 5, 5, 'RoomE는 평온한 휴식을 제공했습니다. 확실히 다시 오겠습니다.', '2023-05-19'),
-(6, 6, 6, 'RoomF는 아늑하고 초대적이었습니다. Host6은 매우 수용적이었습니다.', '2023-06-13'),
-(7, 7, 7, 'RoomG는 조용한 휴양지로 완벽했습니다. Host7은 친절하고 도움이 됩니다.', '2023-07-11'),
-(8, 8, 8, 'RoomH는 넓고 잘 갖추어져 있었습니다. 가족에게 완벽합니다.', '2023-08-23'),
-(9, 9, 9, 'RoomI는 멋진 전망을 제공했습니다. Host9은 민감하고 도움이 되었습니다.', '2023-09-15'),
-(10, 10, 10, 'RoomJ는 특별한 날을 기억에 남게 만들었습니다. 감사합니다, Host10!', '2023-10-17');
+(1, 1, 1, 'Great room and excellent location!', '2023-01-31'),
+(2, 2, 2, 'Clean and comfortable. I enjoyed my stay.', '2023-02-16'),
+(3, 3, 3, 'RoomC exceeded my expectations. Fantastic host!', '2023-03-21'),
+(4, 4, 4, 'RoomD had a breathtaking view. Highly recommended!', '2023-04-26'),
+(5, 5, 5, 'RoomE provided a serene retreat. Will definitely come back.', '2023-05-19'),
+(6, 6, 6, 'RoomF was cozy and inviting. Host6 was very accommodating.', '2023-06-13'),
+(7, 7, 7, 'RoomG was perfect for a quiet getaway. Host7 was friendly and helpful.', '2023-07-11'),
+(8, 8, 8, 'RoomH was spacious and well-equipped. Perfect for a family.', '2023-08-23'),
+(9, 9, 9, 'RoomI had stunning views. Host9 was responsive and helpful.', '2023-09-15'),
+(10, 10, 10, 'RoomJ made our special occasion memorable. Thank you, Host10!', '2023-10-17');
