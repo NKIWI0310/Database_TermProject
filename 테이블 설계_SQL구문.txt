@@ -1,69 +1,73 @@
-CREATE TABLE User (
-    UserID INT PRIMARY KEY,
-    Name VARCHAR(100),
-    Email VARCHAR(100),
-    PhoneNum VARCHAR(20)
+CREATE TABLE user (
+    user_id VARCHAR(100) PRIMARY KEY,
+    password VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone_num VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE Host (
-    HostID INT PRIMARY KEY,
-    Name VARCHAR(100),
-    Email VARCHAR(100),
-    PhoneNum VARCHAR(20)
+CREATE TABLE host (
+    host_id VARCHAR(100) PRIMARY KEY,
+    password VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone_num VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE Room (
-    RoomID INT PRIMARY KEY,
-    Name VARCHAR(100),
-    Location VARCHAR(100),
-    HostID INT,
-    Room_size INT,
-    Room_Price INT,
-    Room_Shape VARCHAR(50),
-    FOREIGN KEY (HostID) REFERENCES Host(HostID)
+CREATE TABLE room (
+    room_id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    location VARCHAR(100),
+    host_id VARCHAR(100) NOT NULL,
+    room_size INT NOT NULL,
+    room_price INT NOT NULL,
+    room_shape VARCHAR(50),
+    FOREIGN KEY (host_id) REFERENCES host(host_id)
 );
 
-CREATE TABLE Contract (
-    ContractID INT PRIMARY KEY,
-    UserID INT,
-    HostID INT,
-    ContractDate DATE,
-    Price INT,
-    Duration INT,
-    Start_time DATETIME,
-    End_time DATETIME,
-    FOREIGN KEY (UserID) REFERENCES User(UserID),
-    FOREIGN KEY (HostID) REFERENCES Host(HostID)
+CREATE TABLE contract (
+    contract_id INT PRIMARY KEY,
+    user_id VARCHAR(100) NOT NULL,
+    host_id VARCHAR(100) NOT NULL,
+    contract_date DATE NOT NULL,
+    price INT NOT NULL,
+    duration INT NOT NULL,
+    start_time DATETIME NOT NULL,
+    end_time DATETIME NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (host_id) REFERENCES host(host_id),
+    CONSTRAINT UQ_contract_user UNIQUE (user_id),
+    CONSTRAINT UQ_contract_host UNIQUE (host_id)
 );
 
-CREATE TABLE Bill (
-    BillID INT PRIMARY KEY,
-    Date DATE,
-    Price INT,
-    UserID INT,
-    ContractID INT UNIQUE,
-    Status VARCHAR(20),
-    PayMethod VARCHAR(50),
-    FOREIGN KEY (UserID) REFERENCES User(UserID),
-    FOREIGN KEY (ContractID) REFERENCES Contract(ContractID)
+CREATE TABLE bill (
+    bill_id INT PRIMARY KEY,
+    date DATE NOT NULL,
+    price INT NOT NULL,
+    user_id VARCHAR(100) NOT NULL,
+    contract_id INT UNIQUE,
+    status VARCHAR(20) NOT NULL,
+    pay_method VARCHAR(50) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (contract_id) REFERENCES contract(contract_id)
 );
 
-CREATE TABLE Message (
-    MessageID INT PRIMARY KEY,
-    UserID INT,
-    HostID INT,
-    Content varchar(1000),
-    MessageTime DATETIME,
-    FOREIGN KEY (UserID) REFERENCES User(UserID),
-    FOREIGN KEY (HostID) REFERENCES Host(HostID)
+CREATE TABLE message (
+    message_id INT PRIMARY KEY,
+    user_id VARCHAR(100) NOT NULL,
+    host_id VARCHAR(100) NOT NULL,
+    content VARCHAR(1000) NOT NULL,
+    message_time DATETIME NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (host_id) REFERENCES host(host_id)
 );
 
-CREATE TABLE Review (
-    ReviewID INT PRIMARY KEY,
-    UserID INT,
-    RoomID INT,
-    Content TEXT,
-    Date DATE,
-    FOREIGN KEY (UserID) REFERENCES User(UserID),
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID)
+CREATE TABLE review (
+    review_id INT PRIMARY KEY,
+    user_id VARCHAR(100) NOT NULL,
+    room_id INT NOT NULL,
+    content TEXT NOT NULL,
+    date DATE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (room_id) REFERENCES room(room_id)
 );

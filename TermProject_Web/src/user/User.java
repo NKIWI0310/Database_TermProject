@@ -1,49 +1,49 @@
 package user;
 
 public class User {
-    private String UserID;
-    private String Password;
-    private String Email;
-    private String PhoneNum;
-    private String Name;
+    private String user_id;
+    private String password;
+    private String name;
+    private String email;
+    private String phone_num;
 
-    public String getUserID() {
-        return UserID;
+    public String getUser_id() {
+        return user_id;
     }
 
-    public void setUserID(String userID) {
-        this.UserID = userID;
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        this.Password = password;
+        this.password = password;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        this.Email = email;
+        this.email = email;
     }
 
-    public String getPhoneNum() {
-        return PhoneNum;
+    public String getPhone_num() {
+        return phone_num;
     }
 
-    public void setPhoneNum(String phoneNum) {
-        this.PhoneNum = phoneNum;
+    public void setPhone_num(String phone_num) {
+        this.phone_num = phone_num;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        this.Name = name;
+        this.name = name;
     }
 }

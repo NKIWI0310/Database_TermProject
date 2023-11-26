@@ -23,12 +23,12 @@
     <form action = "loginAction.jsp">
 
         <div class = "int-area">
-            <input type = "text" name = "Email" autocomplete="off" required>
-            <label for = "Email">ID</label>
+            <input type = "text" id = "user_id" name = "user_id" autocomplete="off" required>
+            <label for = "user_id">ID</label>
         </div>
         <div class = "int-area">
-            <input type = "password" name = "Password" autocomplete="off" required>
-            <label for = "Password">PW</label>
+            <input type = "password" id = "password" name = "password" autocomplete="off" required>
+            <label for = "password">PW</label>
         </div>
         <div class = "btn-area">
             <button type = "submit">Sign-in</button>
@@ -42,13 +42,13 @@
 
 
     <script>
-        let Email = $('#Email');
-        let Password = $('#Password');
+        let UserID = $('#user_id');
+        let Password = $('#password');
         let btn = $('#btn');
 
         $(btn).on('click', function (){
-            if($(Email).val() == ""){
-                $(Email).next('label').addClass('warning');
+            if($(UserID).val() == ""){
+                $(UserID).next('label').addClass('warning');
             }
             else if($(Password).val() == ""){
                 $(Password).next('label').addClass('warning');
