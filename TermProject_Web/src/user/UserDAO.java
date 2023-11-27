@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+import database.database;
 public class UserDAO {
 
     private Connection conn = null;
@@ -14,9 +14,9 @@ public class UserDAO {
     public UserDAO(){
         try{
 
-            String dbURL = "jdbc:mysql://192.168.56.101:4567/Term_project";
-            String dbID = "dongmin-lee";
-            String dbPassword = "1234";
+            String dbURL = database.dbURL;
+            String dbID = database.dbID;
+            String dbPassword = database.dbPassword;
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
             conn = DriverManager.getConnection(dbURL,dbID,dbPassword);
         }catch (Exception e){

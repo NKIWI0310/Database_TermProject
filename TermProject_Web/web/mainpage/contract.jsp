@@ -38,6 +38,10 @@
             left: 0;
             z-index: 1000;
         }
+        .sidenav h2 {
+            text-align: center;
+            margin-top: 20px; /* 필요에 따라 조절 */
+        }
 
         .nav-item {
             margin: 5px 0;
@@ -84,7 +88,7 @@
 </head>
 
 <%
-    String id = user.getUser_id();
+    String name = user.getName();
 %>
 <body>
 
@@ -94,7 +98,10 @@
         <div class="container-fluid d-flex justify-content-end align-items-center">
             <div class="navbar-header">
             <span class="navbar-text">
-                <strong><%=id%> 님</strong>
+                <strong><%=name%> 님</strong>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/TermProject_Web_war_exploded/logout.jsp">LogOut</a></li>
+                </ul>
             </span>
             </div>
         </div>
@@ -106,6 +113,12 @@
             <h2>Term Project</h2>
             <div class="position-sticky">
                 <ul class="navbar nav flex-column">
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
                     <li class="nav-item">
                         <a class="nav-link active" href="./roomlist.jsp">
                             방 목록
