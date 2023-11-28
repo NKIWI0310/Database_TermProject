@@ -8,6 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="user.UserDAO" %>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="database.database" %>
+
 <% request.setCharacterEncoding("UTF-8"); %>
 
 <jsp:useBean id="user" class="user.User" scope="session" />
@@ -16,6 +19,11 @@
 <jsp:setProperty name="user" property="email" />
 <jsp:setProperty name="user" property="phone_num" />
 <jsp:setProperty name="user" property="name" />
+
+<%
+    request.setCharacterEncoding("UTF-8");
+    String userId = user.getUser_id(); // Get current user ID from the session
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -174,7 +182,55 @@
         </nav>
 
         <main role="main" class="main-content">
+            <div class="container mt-3">
 
+                <h2>호스트에게 메세지 보내기</h2>
+
+                <form action="sendMessage.jsp" method="post">
+                    <input type="hidden" name="userId" value="<%= userId %>">
+
+                    <div class="mb-3">
+                        <label for="hostId" class="form-label">Host ID:</label>
+                        <input type="text" class="form-control" id="hostId" name="hostId" value="" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="messageContent" class="form-label">Message:</label>
+                        <textarea class="form-control" id="messageContent" name="content" rows="5" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+
+                <%
+                    // Handle the form submission to insert the message into the database
+                    if ("POST".equalsIgnoreCase(request.getMethod())) {
+                        try {
+                            Class.forName("com.mysql.cj.jdbc.Driver");
+                            String dbURL = database.dbURL;
+                            String dbID = database.dbID;
+                            String dbPassword = database.dbPassword;
+                            Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+
+                            String hostIdInput = request.getParameter("hostId");
+                            String content = request.getParameter("content");
+
+                            // Insert the message into the database
+                            String insertQuery = "INSERT INTO message (user_id, host_id, content, message_time) VALUES (?, ?, ?, NOW())";
+                            try (PreparedStatement preparedStatement = conn.prepareStatement(insertQuery)) {
+                                preparedStatement.setString(1, userId);
+                                preparedStatement.setString(2, hostIdInput);
+                                preparedStatement.setString(3, content);
+                                preparedStatement.executeUpdate();
+                            }
+
+                            conn.close();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                %>
+            </div>
         </main>
     </div>
 </div>

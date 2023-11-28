@@ -118,33 +118,57 @@
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
-                    <li class="nav-item"></li>
+                    <li class="nav-item">
+                        <h2>사용자 기능</h2>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="./roomlist.jsp">
-                            방 목록
+                            방 목록 조회
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="./bill.jsp">
-                            청구서
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link active" href="./message.jsp">
-                            메세지
+                            청구서 조회
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="./selectHost.jsp">
-                            호스트 조회
+                        <a class="nav-link active" href="messageSend.jsp">
+                            메세지 보내기
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="./contract.jsp">
-                            계약
+                            계약서 보내기
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./contract.jsp">
+                            리뷰 남기기
+                        </a>
+                    </li>
+
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item">
+                        <h2>호스트 기능</h2>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="messageSend.jsp">
+                            메세지 확인
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="messageSend.jsp">
+                            자신의 방 삭제
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./contract.jsp">
+                            계약서 확인
+                        </a>
+                    </li>
+
                 </ul>
             </div>
         </nav>

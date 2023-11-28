@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: LEEDONGMIN
-  Date: 2023-11-27
-  Time: 오후 7:24
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="user.UserDAO" %>
 <%@ page import="java.io.PrintWriter" %>
@@ -16,6 +9,16 @@
 <jsp:setProperty name="user" property="email" />
 <jsp:setProperty name="user" property="phone_num" />
 <jsp:setProperty name="user" property="name" />
+<%@ page import="bill.BillDAO" %>
+<%@ page import="bill.Bill" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+
+<%
+    request.setCharacterEncoding("UTF-8");
+    String id = user.getUser_id();
+    List<Bill> bills = BillDAO.getBillsByUserId(id);
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -87,9 +90,6 @@
     </style>
 </head>
 
-<%
-    String id = user.getUser_id();
-%>
 <body>
 
 <div class="container-fluid">
@@ -118,38 +118,89 @@
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
-                    <li class="nav-item"></li>
+                    <li class="nav-item">
+                        <h2>사용자 기능</h2>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="./roomlist.jsp">
-                            방 목록
+                            방 목록 조회
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="./bill.jsp">
-                            청구서
+                            청구서 조회
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="messageSend.jsp">
+                            메세지 보내기
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./contractSend.jsp">
+                            계약서 보내기
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./review.jsp">
+                            리뷰 남기기
                         </a>
                     </li>
 
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="./message.jsp">
-                            메세지
+                        <h2>호스트 기능</h2>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./messageReceive.jsp">
+                            메세지 확인
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="./selectHost.jsp">
-                            호스트 조회
+                        <a class="nav-link active" href="./RoomDelete.jsp">
+                            자신의 방 삭제
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="./contract.jsp">
-                            계약
+                        <a class="nav-link active" href="./contractReceive.jsp">
+                            계약서 확인
                         </a>
                     </li>
+
                 </ul>
             </div>
         </nav>
 
         <main role="main" class="main-content">
+            <div class="container mt-3">
+                <h2>청구서 목록</h2>
+
+                <div class="row">
+                    <%
+                        for (Bill bill : bills) {
+                    %>
+                    <div class="col-md-4 mt-3">
+                        <div class="card">
+                            <div class="card-header">
+                                Bill ID: <%= bill.getBillId() %>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Date: <%= new SimpleDateFormat("yyyy-MM-dd").format(bill.getDate()) %></p>
+                                <p class="card-text">Price: <%= bill.getPrice() %></p>
+                                <p class="card-text">User ID: <%= bill.getUserId() %></p>
+                                <p class="card-text">Contract ID: <%= bill.getContractId() %></p>
+                                <p class="card-text">Status: <%= bill.getStatus() %></p>
+                                <p class="card-text">Payment Method: <%= bill.getPayMethod() %></p>
+                            </div>
+                        </div>
+                    </div>
+                    <%
+                        }
+                    %>
+                </div>
+            </div>
 
         </main>
     </div>
