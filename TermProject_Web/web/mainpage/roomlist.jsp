@@ -110,69 +110,70 @@
 
 
     <div class="row">
-        <nav class="col-md-3 sidebar sidenav">
-            <h2>Term Project</h2>
-            <div class="position-sticky">
-                <ul class="navbar nav flex-column">
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item">
-                        <h2>사용자 기능</h2>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="./roomlist.jsp">
-                            방 목록 조회
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="./bill.jsp">
-                            청구서 조회
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="messageSend.jsp">
-                            메세지 보내기
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="./contract.jsp">
-                            계약서 보내기
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="./contract.jsp">
-                            리뷰 남기기
-                        </a>
-                    </li>
+        <div class="row">
+            <nav class="col-md-3 sidebar sidenav">
+                <h2>Term Project</h2>
+                <div class="position-sticky">
+                    <ul class="navbar nav flex-column">
+                        <li class="nav-item"></li>
+                        <li class="nav-item"></li>
+                        <li class="nav-item"></li>
+                        <li class="nav-item"></li>
+                        <li class="nav-item"></li>
+                        <li class="nav-item">
+                            <h2>사용자 기능</h2>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="./roomlist.jsp">
+                                방 목록 조회
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="./bill.jsp">
+                                청구서 조회
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="messageSend.jsp">
+                                메세지 보내기
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="./contractSend.jsp">
+                                계약서 보내기
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="./review.jsp">
+                                리뷰 남기기
+                            </a>
+                        </li>
 
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item">
-                        <h2>호스트 기능</h2>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="messageSend.jsp">
-                            메세지 확인
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="messageSend.jsp">
-                            자신의 방 삭제
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="./contract.jsp">
-                            계약서 확인
-                        </a>
-                    </li>
+                        <li class="nav-item"></li>
+                        <li class="nav-item"></li>
+                        <li class="nav-item"></li>
+                        <li class="nav-item">
+                            <h2>호스트 기능</h2>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="./messageReceive.jsp">
+                                메세지 확인
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="./RoomDelete.jsp">
+                                자신의 방 삭제
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="./contractReceive.jsp">
+                                계약서 확인
+                            </a>
+                        </li>
 
-                </ul>
-            </div>
-        </nav>
+                    </ul>
+                </div>
+            </nav>
 
         <main role="main" class="main-content">
             <div class="row">
@@ -184,29 +185,57 @@
                         String dbPassword = "1234";
                         Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 
-                        String query = "SELECT * FROM room";
-                        Statement stmt = conn.createStatement();
-                        ResultSet rs = stmt.executeQuery(query);
+                        String roomQuery = "SELECT * FROM room";
+                        Statement roomStmt = conn.createStatement();
+                        ResultSet roomRs = roomStmt.executeQuery(roomQuery);
 
-                        while (rs.next()) {
+                        while (roomRs.next()) {
+                            String roomId = roomRs.getString("room_id");
+                            String roomName = roomRs.getString("name");
+                            String roomLocation = roomRs.getString("location");
+                            String roomHostId = roomRs.getString("host_id");
+                            int roomSize = roomRs.getInt("room_size");
+                            int roomPrice = roomRs.getInt("room_price");
+                            String roomShape = roomRs.getString("room_shape");
+
                 %>
                 <div class="col-md-4 mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title"><%= rs.getString("name") %></h5>
-                            <p class="card-text">Location: <%= rs.getString("location") %></p>
-                            <p class="card-text">Host ID: <%= rs.getString("host_id") %></p>
-                            <p class="card-text">Size: <%= rs.getInt("room_size") %></p>
-                            <p class="card-text">Price: <%= rs.getInt("room_price") %></p>
-                            <p class="card-text">Shape: <%= rs.getString("room_shape") %></p>
+                            <h5 class="card-title"><%= roomName %></h5>
+                            <p class="card-text">Location: <%= roomLocation %></p>
+                            <p class="card-text">Host ID: <%= roomHostId %></p>
+                            <p class="card-text">Size: <%= roomSize %></p>
+                            <p class="card-text">Price: <%= roomPrice %></p>
+                            <p class="card-text">Shape: <%= roomShape %></p>
+
+                            <%
+                                String reviewQuery = "SELECT * FROM review WHERE room_id = ?";
+                                try (PreparedStatement reviewStmt = conn.prepareStatement(reviewQuery)) {
+                                    reviewStmt.setString(1, roomId);
+                                    ResultSet reviewRs = reviewStmt.executeQuery();
+
+                                    while (reviewRs.next()) {
+                                        String reviewText = reviewRs.getString("content");
+                                        String reviewerId = reviewRs.getString("user_id");
+                            %>
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2 text-muted">Review by <%= reviewerId %></h6>
+                                    <p class="card-text"><%= reviewText %></p>
+                                </div>
+                            </div>
+                            <%
+                                    }
+                                }
+                            %>
                         </div>
                     </div>
                 </div>
                 <%
                         }
-
-                        rs.close();
-                        stmt.close();
+                        roomRs.close();
+                        roomStmt.close();
                         conn.close();
                     } catch (Exception e) {
                         e.printStackTrace();

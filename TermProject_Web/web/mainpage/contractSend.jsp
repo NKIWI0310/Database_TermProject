@@ -191,8 +191,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="host_id" class="form-label">호스트</label>
-                        <input type="text" class="form-control" id="host_id" name="host_id" required>
+                        <label for="room_id" class="form-label">방 번호</label>
+                        <input type="number" class="form-control" id="room_id" name="room_id" required>
                     </div>
 
                     <div class="mb-3">
@@ -226,14 +226,15 @@
 <%
     if ("POST".equalsIgnoreCase(request.getMethod())) {
         String userId = request.getParameter("user_id");
-        String hostId = request.getParameter("host_id");
+        int roomId = Integer.parseInt(request.getParameter("room_id"));
         String contractDate = request.getParameter("contract_date");
         int price = Integer.parseInt(request.getParameter("price"));
         int duration = Integer.parseInt(request.getParameter("duration"));
         String startTime = request.getParameter("start_time");
         String endTime = request.getParameter("end_time");
+
         ContractDAO contractDAO = new ContractDAO(database.dbURL, database.dbID, database.dbPassword);
-        contractDAO.insertContract(userId, hostId,contractDate, price, duration, startTime, endTime);
+        contractDAO.insertContract(userId, roomId,contractDate, price, duration, startTime, endTime);
     }
 %>
 </html>

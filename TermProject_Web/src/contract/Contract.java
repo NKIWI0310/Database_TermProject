@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 public class Contract {
     private int contractId;
     private String userId;
-    private String hostId;
+    private int roomId;
     private LocalDate contractDate;
     private int price;
     private int duration;
@@ -18,9 +18,9 @@ public class Contract {
 
     }
 
-    public Contract(String userId, String hostId, LocalDate contractDate, int price, int duration, LocalDateTime startTime, LocalDateTime endTime) {
+    public Contract(String userId, int roomId, LocalDate contractDate, int price, int duration, LocalDateTime startTime, LocalDateTime endTime) {
         this.userId = userId;
-        this.hostId = hostId;
+        this.roomId = roomId;
         this.contractDate = contractDate;
         this.price = price;
         this.duration = duration;
@@ -45,12 +45,12 @@ public class Contract {
         this.userId = userId;
     }
 
-    public String getHostId() {
-        return hostId;
+    public int getRoomId() {
+        return roomId;
     }
 
-    public void setHostId(String hostId) {
-        this.hostId = hostId;
+    public void setRoomId(int hostId) {
+        this.roomId = roomId;
     }
 
     public LocalDate getContractDate() {

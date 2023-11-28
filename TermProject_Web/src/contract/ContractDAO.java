@@ -17,16 +17,16 @@ public class ContractDAO {
         this.dbPassword = dbPassword;
     }
 
-    public void insertContract(String userId, String hostId, String contractDate, int price, int duration, String startTime, String endTime) {
+    public void insertContract(String userId, int roomId, String contractDate, int price, int duration, String startTime, String endTime) {
         try {
-            String query = "INSERT INTO contract (user_id, host_id, contract_date, price, duration, start_time, end_time) " +
+            String query = "INSERT INTO contract (user_id, room_id, contract_date, price, duration, start_time, end_time) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             try (Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
                  PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
                 preparedStatement.setString(1, userId);
-                preparedStatement.setString(2, hostId);
+                preparedStatement.setInt(2, roomId);
                 preparedStatement.setString(3, contractDate);
                 preparedStatement.setInt(4, price);
                 preparedStatement.setInt(5, duration);

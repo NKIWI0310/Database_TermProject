@@ -137,12 +137,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="./contract.jsp">
+                        <a class="nav-link active" href="./contractSend.jsp">
                             계약서 보내기
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="./contract.jsp">
+                        <a class="nav-link active" href="./review.jsp">
                             리뷰 남기기
                         </a>
                     </li>
@@ -154,17 +154,17 @@
                         <h2>호스트 기능</h2>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="messageSend.jsp">
+                        <a class="nav-link active" href="./messageReceive.jsp">
                             메세지 확인
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="messageSend.jsp">
+                        <a class="nav-link active" href="./RoomDelete.jsp">
                             자신의 방 삭제
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="./contract.jsp">
+                        <a class="nav-link active" href="./contractReceive.jsp">
                             계약서 확인
                         </a>
                     </li>

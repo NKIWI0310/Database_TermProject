@@ -8,7 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="user.UserDAO" %>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="review.ReviewDAO" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.SQLException" %>
 <% request.setCharacterEncoding("UTF-8"); %>
+<%@ page import="database.database" %>
 
 <jsp:useBean id="user" class="user.User" scope="session" />
 <jsp:setProperty name="user" property="user_id" />
@@ -174,10 +180,36 @@
         </nav>
 
         <main role="main" class="main-content">
-
+            <div class="container mt-5">
+                <h2>리뷰 작성</h2>
+                <form action="review.jsp" method="post">
+                    <div class="mb-3">
+                        <label for="room_id" class="form-label">방 번호</label>
+                        <input type="number" class="form-control" id="room_id" name="room_id" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="content" class="form-label">리뷰 내용</label>
+                        <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">리뷰 작성</button>
+                </form>
+            </div>
         </main>
+
     </div>
 </div>
 </body>
+
+<%
+    if ("POST".equalsIgnoreCase(request.getMethod())) {
+        String userId = id;
+        int room_id = Integer.parseInt(request.getParameter("room_id"));
+        String content = request.getParameter("content");
+
+        ReviewDAO reviewDAO = new ReviewDAO(database.dbURL, database.dbID, database.dbPassword);
+        reviewDAO.insertQuery(userId, room_id, content);
+
+    }
+%>
 
 </html>

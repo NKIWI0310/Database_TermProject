@@ -23,7 +23,7 @@
 
 <%
     request.setCharacterEncoding("UTF-8");
-    String userId = user.getUser_id(); // Get current user ID from the session
+    String userId = user.getUser_id();
 %>
 
 <!DOCTYPE html>
@@ -205,12 +205,11 @@
 
                 <%
                     MessageDAO messageDAO = new MessageDAO(database.dbURL, database.dbID, database.dbPassword);
-                    // Handle the form submission using MessageDAO
+
                     if ("POST".equalsIgnoreCase(request.getMethod())) {
                         String hostIdInput = request.getParameter("hostId");
                         String content = request.getParameter("content");
 
-                        // Use MessageDAO to send the message
                         messageDAO.sendMessage(id, hostIdInput, content);
                     }
                 %>

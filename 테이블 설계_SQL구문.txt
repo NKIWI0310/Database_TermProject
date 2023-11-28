@@ -27,15 +27,15 @@ CREATE TABLE room (
 
 CREATE TABLE contract (
     contract_id INT  NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    room_id INT NOT NULL,
     user_id VARCHAR(100) NOT NULL,
-    host_id VARCHAR(100) NOT NULL,
     contract_date DATE NOT NULL,
     price INT NOT NULL,
     duration INT NOT NULL,
     start_time DATETIME NOT NULL,
     end_time DATETIME NOT NULL,
     FOREIGN KEY (user_id) REFERENCES user(user_id),
-    FOREIGN KEY (host_id) REFERENCES host(host_id)
+    FOREIGN KEY (room_id) REFERENCES room(room_id)
 );
 
 CREATE TABLE bill (
