@@ -1,9 +1,7 @@
 package message;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
+
 import database.database;
 
 public class MessageDAO {
@@ -13,25 +11,33 @@ public class MessageDAO {
     private String dbPassword;
 
     public MessageDAO(String dbURL, String dbID, String dbPassword) {
-        this.dbURL = database.dbURL;
-        this.dbID = database.dbID;
-        this.dbPassword = database.dbID;
+        this.dbURL = dbURL;
+        this.dbID = dbID;
+        this.dbPassword = dbPassword;
     }
 
     public void sendMessage(String userId, String hostId, String content) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword)) {
-                String insertQuery = "INSERT INTO message (user_id, host_id, content, message_time) VALUES (?, ?, ?, NOW())";
-                try (PreparedStatement preparedStatement = conn.prepareStatement(insertQuery)) {
-                    preparedStatement.setString(1, userId);
-                    preparedStatement.setString(2, hostId);
-                    preparedStatement.setString(3, content);
-                    preparedStatement.executeUpdate();
-                }
+        String insertQuery = "INSERT INTO message (user_id, host_id, content, message_time) VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
+
+        try (Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+             PreparedStatement preparedStatement = conn.prepareStatement(insertQuery)) {
+
+            preparedStatement.setString(1, userId);
+            preparedStatement.setString(2, hostId);
+            preparedStatement.setString(3, content);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Message sent successfully.");
+            } else {
+                System.out.println("Failed to send message.");
             }
-        } catch (Exception e) {
+
+        } catch (SQLException e) {
             e.printStackTrace();
+            System.err.println("SQL State: " + e.getSQLState());
+            System.err.println("Error Code: " + e.getErrorCode());
         }
     }
 }

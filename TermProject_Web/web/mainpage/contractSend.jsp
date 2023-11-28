@@ -8,7 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="user.UserDAO" %>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="contract.ContractDAO" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.io.IOException" %>
 <% request.setCharacterEncoding("UTF-8"); %>
+<%@ page import="database.database" %>
 
 <jsp:useBean id="user" class="user.User" scope="session" />
 <jsp:setProperty name="user" property="user_id" />
@@ -174,10 +178,78 @@
         </nav>
 
         <main role="main" class="main-content">
+            <div class="container mt-3">
+                <h2>계약서 작성</h2>
 
+                <form action="contractSend.jsp" method="post">
+
+                    <!-- Hidden input for user_id -->
+                    <input type="hidden" name="user_id" value="<%= id %>">
+
+                    <!-- Add other form fields as needed -->
+                    <div class="mb-3">
+                        <label for="contract_date" class="form-label">계약일</label>
+                        <input type="date" class="form-control" id="contract_date" name="contract_date" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="price" class="form-label">가격</label>
+                        <input type="number" class="form-control" id="price" name="price" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="duration" class="form-label">기간</label>
+                        <input type="number" class="form-control" id="duration" name="duration" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="start_time" class="form-label">시작 시간</label>
+                        <input type="datetime-local" class="form-control" id="start_time" name="start_time" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="end_time" class="form-label">종료 시간</label>
+                        <input type="datetime-local" class="form-control" id="end_time" name="end_time" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">계약서 작성</button>
+                </form>
+            </div>
         </main>
     </div>
 </div>
 </body>
 
+<%
+    String userId = request.getParameter("user_id");
+    String contractDate = request.getParameter("contract_date");
+    String price = request.getParameter("price");
+    String duration = request.getParameter("duration");
+    String startTime = request.getParameter("start_time");
+    String endTime = request.getParameter("end_time");
+
+    // Database connection details
+    String jdbcUrl = database.dbURL;
+    String dbUser = database.dbID;
+    String dbPassword = database.dbPassword;
+
+    Connection connection = null;
+    ContractDAO contractDAO = null;
+
+    try {
+
+        contractDAO = new ContractDAO(jdbcUrl,dbUser,dbPassword);
+        contractDAO.insertContract(userId, contractDate, price, duration, startTime, endTime);
+
+    } finally {
+        // Close resources
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+%>
 </html>

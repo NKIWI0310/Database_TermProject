@@ -15,7 +15,7 @@ CREATE TABLE host (
 );
 
 CREATE TABLE room (
-    room_id INT PRIMARY KEY,
+    room_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     location VARCHAR(100),
     host_id VARCHAR(100) NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE room (
 );
 
 CREATE TABLE contract (
-    contract_id INT PRIMARY KEY,
+    contract_id INT  NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id VARCHAR(100) NOT NULL,
     host_id VARCHAR(100) NOT NULL,
     contract_date DATE NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE contract (
 );
 
 CREATE TABLE bill (
-    bill_id INT PRIMARY KEY,
+    bill_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     date DATE NOT NULL,
     price INT NOT NULL,
     user_id VARCHAR(100) NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE bill (
 );
 
 CREATE TABLE message (
-    message_id INT PRIMARY KEY,
+    message_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
     user_id VARCHAR(100) NOT NULL,
     host_id VARCHAR(100) NOT NULL,
     content VARCHAR(1000) NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE message (
 );
 
 CREATE TABLE review (
-    review_id INT PRIMARY KEY,
+    review_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id VARCHAR(100) NOT NULL,
     room_id INT NOT NULL,
     content TEXT NOT NULL,

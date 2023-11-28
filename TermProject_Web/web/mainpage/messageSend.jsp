@@ -10,6 +10,7 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="database.database" %>
+<%@ page import="message.MessageDAO" %>
 
 <% request.setCharacterEncoding("UTF-8"); %>
 
@@ -186,7 +187,7 @@
 
                 <h2>호스트에게 메세지 보내기</h2>
 
-                <form action="sendMessage.jsp" method="post">
+                <form action="messageSend.jsp" method="post">
                     <input type="hidden" name="userId" value="<%= userId %>">
 
                     <div class="mb-3">
@@ -203,31 +204,14 @@
                 </form>
 
                 <%
-                    // Handle the form submission to insert the message into the database
+                    MessageDAO messageDAO = new MessageDAO(database.dbURL, database.dbID, database.dbPassword);
+                    // Handle the form submission using MessageDAO
                     if ("POST".equalsIgnoreCase(request.getMethod())) {
-                        try {
-                            Class.forName("com.mysql.cj.jdbc.Driver");
-                            String dbURL = database.dbURL;
-                            String dbID = database.dbID;
-                            String dbPassword = database.dbPassword;
-                            Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+                        String hostIdInput = request.getParameter("hostId");
+                        String content = request.getParameter("content");
 
-                            String hostIdInput = request.getParameter("hostId");
-                            String content = request.getParameter("content");
-
-                            // Insert the message into the database
-                            String insertQuery = "INSERT INTO message (user_id, host_id, content, message_time) VALUES (?, ?, ?, NOW())";
-                            try (PreparedStatement preparedStatement = conn.prepareStatement(insertQuery)) {
-                                preparedStatement.setString(1, userId);
-                                preparedStatement.setString(2, hostIdInput);
-                                preparedStatement.setString(3, content);
-                                preparedStatement.executeUpdate();
-                            }
-
-                            conn.close();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        // Use MessageDAO to send the message
+                        messageDAO.sendMessage(id, hostIdInput, content);
                     }
                 %>
             </div>
