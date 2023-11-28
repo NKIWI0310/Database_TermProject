@@ -13,7 +13,6 @@ public class Contract {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
-    // Constructors
 
     public Contract() {
 
@@ -29,7 +28,6 @@ public class Contract {
         this.endTime = endTime;
     }
 
-    // Getters and Setters
 
     public int getContractId() {
         return contractId;
@@ -95,5 +93,4 @@ public class Contract {
         this.endTime = endTime;
     }
 
-    // Additional methods as needed
 }

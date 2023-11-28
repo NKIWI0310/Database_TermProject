@@ -35,9 +35,7 @@ CREATE TABLE contract (
     start_time DATETIME NOT NULL,
     end_time DATETIME NOT NULL,
     FOREIGN KEY (user_id) REFERENCES user(user_id),
-    FOREIGN KEY (host_id) REFERENCES host(host_id),
-    CONSTRAINT UQ_contract_user UNIQUE (user_id),
-    CONSTRAINT UQ_contract_host UNIQUE (host_id)
+    FOREIGN KEY (host_id) REFERENCES host(host_id)
 );
 
 CREATE TABLE bill (

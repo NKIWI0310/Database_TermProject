@@ -183,13 +183,16 @@
 
                 <form action="contractSend.jsp" method="post">
 
-                    <!-- Hidden input for user_id -->
                     <input type="hidden" name="user_id" value="<%= id %>">
 
-                    <!-- Add other form fields as needed -->
                     <div class="mb-3">
                         <label for="contract_date" class="form-label">계약일</label>
                         <input type="date" class="form-control" id="contract_date" name="contract_date" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="host_id" class="form-label">호스트</label>
+                        <input type="text" class="form-control" id="host_id" name="host_id" required>
                     </div>
 
                     <div class="mb-3">
@@ -203,12 +206,12 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="start_time" class="form-label">시작 시간</label>
+                        <label for="start_time" class="form-label">계약 시작 시간</label>
                         <input type="datetime-local" class="form-control" id="start_time" name="start_time" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="end_time" class="form-label">종료 시간</label>
+                        <label for="end_time" class="form-label">계약 종료 시간</label>
                         <input type="datetime-local" class="form-control" id="end_time" name="end_time" required>
                     </div>
 
@@ -221,35 +224,16 @@
 </body>
 
 <%
-    String userId = request.getParameter("user_id");
-    String contractDate = request.getParameter("contract_date");
-    String price = request.getParameter("price");
-    String duration = request.getParameter("duration");
-    String startTime = request.getParameter("start_time");
-    String endTime = request.getParameter("end_time");
-
-    // Database connection details
-    String jdbcUrl = database.dbURL;
-    String dbUser = database.dbID;
-    String dbPassword = database.dbPassword;
-
-    Connection connection = null;
-    ContractDAO contractDAO = null;
-
-    try {
-
-        contractDAO = new ContractDAO(jdbcUrl,dbUser,dbPassword);
-        contractDAO.insertContract(userId, contractDate, price, duration, startTime, endTime);
-
-    } finally {
-        // Close resources
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+    if ("POST".equalsIgnoreCase(request.getMethod())) {
+        String userId = request.getParameter("user_id");
+        String hostId = request.getParameter("host_id");
+        String contractDate = request.getParameter("contract_date");
+        int price = Integer.parseInt(request.getParameter("price"));
+        int duration = Integer.parseInt(request.getParameter("duration"));
+        String startTime = request.getParameter("start_time");
+        String endTime = request.getParameter("end_time");
+        ContractDAO contractDAO = new ContractDAO(database.dbURL, database.dbID, database.dbPassword);
+        contractDAO.insertContract(userId, hostId,contractDate, price, duration, startTime, endTime);
     }
 %>
 </html>

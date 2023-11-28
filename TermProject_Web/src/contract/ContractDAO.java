@@ -17,29 +17,33 @@ public class ContractDAO {
         this.dbPassword = dbPassword;
     }
 
-    public boolean insertContract(String userId, String contractDate, String price, String duration, String startTime, String endTime) {
+    public void insertContract(String userId, String hostId, String contractDate, int price, int duration, String startTime, String endTime) {
         try {
-            int Realprice = Integer.parseInt(price);
-            int Realduartion = Integer.parseInt(duration);
-            String query = "INSERT INTO contract (user_id, contract_date, Realprice, Realduartion, start_time, end_time) " +
-                    "VALUES (?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO contract (user_id, host_id, contract_date, price, duration, start_time, end_time) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-            Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+            try (Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+                 PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
-            try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
                 preparedStatement.setString(1, userId);
-                preparedStatement.setString(2, contractDate);
-                preparedStatement.setInt(3, Realprice);
-                preparedStatement.setInt(4, Realduartion);
-                preparedStatement.setString(5, startTime);
-                preparedStatement.setString(6, endTime);
+                preparedStatement.setString(2, hostId);
+                preparedStatement.setString(3, contractDate);
+                preparedStatement.setInt(4, price);
+                preparedStatement.setInt(5, duration);
+                preparedStatement.setString(6, startTime);
+                preparedStatement.setString(7, endTime);
 
                 int rowsAffected = preparedStatement.executeUpdate();
-                return rowsAffected > 0;
+
+                if (rowsAffected > 0) {
+                    System.out.println("성공");
+                } else {
+                    System.out.println("실패");
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
     }
+
 }
