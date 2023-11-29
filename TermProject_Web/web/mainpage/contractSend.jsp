@@ -13,6 +13,10 @@
 <%@ page import="java.io.IOException" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <%@ page import="database.database" %>
+<%@ page import="bill.Bill" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.text.ParseException" %>
+<%@ page import="bill.BillDAO" %>
 
 <jsp:useBean id="user" class="user.User" scope="session" />
 <jsp:setProperty name="user" property="user_id" />
@@ -210,8 +214,22 @@
         String startTime = request.getParameter("start_time");
         String endTime = request.getParameter("end_time");
 
+        // 계약서 생성
         ContractDAO contractDAO = new ContractDAO(database.dbURL, database.dbID, database.dbPassword);
-        contractDAO.insertContract(userId, roomId,contractDate, price, duration, startTime, endTime);
+        int contractId = contractDAO.insertContract(userId, roomId, contractDate, price, duration, startTime, endTime);
+
+        // 청구서 생성
+        Bill bill = new Bill();
+        bill.setPrice(price);
+        bill.setUserId(userId);
+        bill.setContractId(contractId);
+        bill.setStatus("unpaid");  // 초기 상태는 미지불로 설정
+        bill.setPayMethod("credit");  // 예시로 신용카드로 설정
+
+        // 데이터베이스에 청구서 삽입
+        BillDAO billDAO = new BillDAO(database.dbURL, database.dbID, database.dbPassword);
+        billDAO.insertBill(bill);
     }
+
 %>
 </html>

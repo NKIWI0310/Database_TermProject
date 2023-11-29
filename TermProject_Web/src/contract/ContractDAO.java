@@ -16,13 +16,15 @@ public class ContractDAO {
         this.dbPassword = dbPassword;
     }
 
-    public void insertContract(String userId, int roomId, String contractDate, int price, int duration, String startTime, String endTime) {
+    public int insertContract(String userId, int roomId, String contractDate, int price, int duration, String startTime, String endTime) {
+        int generatedId = -1;
+
         try {
             String query = "INSERT INTO contract (user_id, room_id, contract_date, price, duration, start_time, end_time) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             try (Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-                 PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+                 PreparedStatement preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
                 preparedStatement.setString(1, userId);
                 preparedStatement.setInt(2, roomId);
@@ -36,6 +38,16 @@ public class ContractDAO {
 
                 if (rowsAffected > 0) {
                     System.out.println("성공");
+
+                    // 생성된 ID 가져오기
+                    try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            generatedId = generatedKeys.getInt(1);
+                            System.out.println("생성된 계약서 ID: " + generatedId);
+                        } else {
+                            System.out.println("계약서 ID를 가져올 수 없습니다.");
+                        }
+                    }
                 } else {
                     System.out.println("실패");
                 }
@@ -43,7 +55,10 @@ public class ContractDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return generatedId;  // 생성된 ID 반환
     }
+
 
     public List<Contract> getContractsByHostId(String hostId) {
         List<Contract> contracts = new ArrayList<>();

@@ -46,13 +46,13 @@ public class ReviewDAO {
                         int rowsAffected = insertStatement.executeUpdate();
 
                         if (rowsAffected > 0) {
-                            System.out.println("Review added successfully.");
+                            System.out.println("리뷰 넣기 성공");
                         } else {
-                            System.out.println("Failed to add review.");
+                            System.out.println("리뷰 넣기 실패");
                         }
                     }
                 } else {
-                    System.out.println("No contract found for the specified user and room. Review not added.");
+                    System.out.println("해당사용자에 대한 계약이 존재하지 않음");
                 }
             }
 

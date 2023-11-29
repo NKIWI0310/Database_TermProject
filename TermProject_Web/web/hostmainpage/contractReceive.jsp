@@ -166,7 +166,7 @@
                                         <p>Room ID: <%= contract.getRoomId() %></p>
                                         <p>계약일: <%= contract.getContractDate() %></p>
                                         <p>가격: <%= contract.getPrice() %></p>
-                                        <p>기간: <%= contract.getDuration() %> months</p>
+                                        <p>기간: <%= contract.getDuration() %></p>
                                         <p>계약 시작 시간: <%= contract.getStartTime() %></p>
                                         <p>계약 종료 시간: <%= contract.getEndTime() %></p>
                                     </div>
