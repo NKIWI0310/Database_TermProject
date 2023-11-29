@@ -203,6 +203,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title"><%= roomName %></h5>
+                            <p class="card-text">Room ID: <%= roomId %></p>
                             <p class="card-text">Location: <%= roomLocation %></p>
                             <p class="card-text">Host ID: <%= roomHostId %></p>
                             <p class="card-text">Size: <%= roomSize %></p>

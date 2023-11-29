@@ -19,9 +19,8 @@
 
 <body>
 <section class = "login-form">
-    <h1>Welcome</h1>
+    <h1>사용자 페이지</h1>
     <form action = "loginAction.jsp">
-
         <div class = "int-area">
             <input type = "text" id = "user_id" name = "user_id" autocomplete="off" required>
             <label for = "user_id">ID</label>
@@ -31,12 +30,15 @@
             <label for = "password">PW</label>
         </div>
         <div class = "btn-area">
-            <button type = "submit">Sign-in</button>
+            <button type = "submit">로그인</button>
         </div>
     </form>
 
     <div class="caption">
-        <a href="register.jsp">Don't have an account? Sign-up</a>
+        <a href="register.jsp">사용자 계정을 만들고 싶다면 여기를 클릭하세요</a>
+    </div>
+    <div class="caption">
+        <a href="./hostAction/hostlogin.jsp">호스트 계정과 관련된 일을 할려면 여기를 클릭하세요</a>
     </div>
 </section>
 

@@ -207,7 +207,7 @@
         String content = request.getParameter("content");
 
         ReviewDAO reviewDAO = new ReviewDAO(database.dbURL, database.dbID, database.dbPassword);
-        reviewDAO.insertQuery(userId, room_id, content);
+        reviewDAO.insertReviewIfContractExists(userId, room_id, content);
 
     }
 %>
