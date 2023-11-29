@@ -92,5 +92,31 @@ public class ContractDAO {
 
         return contracts;
     }
+    public boolean deleteContract(int contractId) {
+        boolean isDeleted = false;
+
+        try {
+            String query = "DELETE FROM contract WHERE contract_id = ?";
+
+            try (Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+                 PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+
+                preparedStatement.setInt(1, contractId);
+
+                int rowsAffected = preparedStatement.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    isDeleted = true;
+                    System.out.println("계약서 삭제 성공");
+                } else {
+                    System.out.println("계약서 삭제 실패");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return isDeleted;
+    }
 
 }

@@ -179,6 +179,7 @@
                                                 boolean isDeleted = roomDAO2.deleteRoom(roomId);
 
                                                 if (isDeleted) {
+                                                    out.println("<script>reloadPageWithDelay();</script>");
                                                     System.out.println("방 삭제 성공");
                                                 } else {
                                                     System.out.println("방 삭제 실패");
@@ -202,3 +203,11 @@
 </body>
 
 </html>
+
+<script>
+    function reloadPageWithDelay() {
+        setTimeout(function () {
+            location.reload();
+        }, 1000);
+    }
+</script>

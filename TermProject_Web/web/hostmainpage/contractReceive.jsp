@@ -169,6 +169,31 @@
                                         <p>기간: <%= contract.getDuration() %></p>
                                         <p>계약 시작 시간: <%= contract.getStartTime() %></p>
                                         <p>계약 종료 시간: <%= contract.getEndTime() %></p>
+                                        <!-- 삭제 버튼 추가 -->
+                                        <form method="post" action="contractReceive.jsp">
+                                            <input type="hidden" name="contractId" value="<%= contract.getContractId() %>">
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('이 계약서를 삭제하시겠습니까?')">삭제</button>
+                                        </form>
+
+                                        <%
+                                            ContractDAO contractDAO2 = new ContractDAO(database.dbURL, database.dbID, database.dbPassword);
+                                            if ("POST".equalsIgnoreCase(request.getMethod())) {
+                                                String deleteContractId = request.getParameter("contractId");
+
+                                                if (deleteContractId != null && !deleteContractId.isEmpty()) {
+                                                    int contractId = Integer.parseInt(deleteContractId);
+
+                                                    boolean isDeleted = contractDAO2.deleteContract(contractId);
+
+                                                    if (isDeleted) {
+                                                        out.println("<script>reloadPageWithDelay();</script>");
+                                                        System.out.println("계약서 삭제 성공");
+                                                    } else {
+                                                        System.out.println("계약서 삭제 실패");
+                                                    }
+                                                }
+                                            }
+                                        %>
                                     </div>
                                 </div>
                             </div>
@@ -187,3 +212,11 @@
 </body>
 
 </html>
+
+<script>
+    function reloadPageWithDelay() {
+        setTimeout(function () {
+            location.reload();
+        }, 1000);
+    }
+</script>
