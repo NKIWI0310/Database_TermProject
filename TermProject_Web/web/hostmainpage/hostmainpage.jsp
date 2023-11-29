@@ -6,16 +6,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="user.UserDAO" %>
-<%@ page import="java.io.PrintWriter" %>
+<%@ page import ="host.HostDAO"%>
+<%@ page import ="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 
-<jsp:useBean id="user" class="user.User" scope="session" />
-<jsp:setProperty name="user" property="user_id" />
-<jsp:setProperty name="user" property="password" />
-<jsp:setProperty name="user" property="email" />
-<jsp:setProperty name="user" property="phone_num" />
-<jsp:setProperty name="user" property="name" />
+<jsp:useBean id="host" class="host.Host" scope="session" />
+<jsp:setProperty name="host" property="host_id" />
+<jsp:setProperty name="host" property="password" />
+<jsp:setProperty name="host" property="email" />
+<jsp:setProperty name="host" property="phone_num" />
+<jsp:setProperty name="host" property="name" />
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -88,7 +89,7 @@
 </head>
 
 <%
-    String id = user.getUser_id();
+    String id = host.getHost_id();
 %>
 <body>
 
@@ -115,38 +116,6 @@
                 <ul class="navbar nav flex-column">
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item">
-                        <h2>사용자 기능</h2>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="./roomlist.jsp">
-                            방 목록 조회
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="./bill.jsp">
-                            청구서 조회
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="messageSend.jsp">
-                            메세지 보내기
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="./contractSend.jsp">
-                            계약서 보내기
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="./review.jsp">
-                            리뷰 남기기
-                        </a>
-                    </li>
-
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>

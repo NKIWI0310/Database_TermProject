@@ -8,10 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="user.UserDAO" %>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="java.sql.*" %>
-<%@ page import="database.database" %>
-<%@ page import="message.MessageDAO" %>
-
 <% request.setCharacterEncoding("UTF-8"); %>
 
 <jsp:useBean id="user" class="user.User" scope="session" />
@@ -20,11 +16,6 @@
 <jsp:setProperty name="user" property="email" />
 <jsp:setProperty name="user" property="phone_num" />
 <jsp:setProperty name="user" property="name" />
-
-<%
-    request.setCharacterEncoding("UTF-8");
-    String userId = user.getUser_id();
-%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -131,66 +122,59 @@
                         <h2>사용자 기능</h2>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="./roomlist.jsp">
+                        <a class="nav-link active" href="../mainpage/roomlist.jsp">
                             방 목록 조회
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="./bill.jsp">
+                        <a class="nav-link active" href="../mainpage/bill.jsp">
                             청구서 조회
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="messageSend.jsp">
+                        <a class="nav-link active" href="../mainpage/messageSend.jsp">
                             메세지 보내기
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="./contractSend.jsp">
+                        <a class="nav-link active" href="../mainpage/contractSend.jsp">
                             계약서 보내기
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="./review.jsp">
+                        <a class="nav-link active" href="../mainpage/review.jsp">
                             리뷰 남기기
                         </a>
                     </li>
+
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item">
+                        <h2>호스트 기능</h2>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="messageReceive.jsp">
+                            메세지 확인
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="RoomDelete.jsp">
+                            자신의 방 삭제
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contractReceive.jsp">
+                            계약서 확인
+                        </a>
+                    </li>
+
                 </ul>
             </div>
         </nav>
 
         <main role="main" class="main-content">
-            <div class="container mt-3">
 
-                <h2>호스트에게 메세지 보내기</h2>
-
-                <form action="messageSend.jsp" method="post">
-                    <input type="hidden" name="userId" value="<%= userId %>">
-
-                    <div class="mb-3">
-                        <label for="hostId" class="form-label">Host ID:</label>
-                        <input type="text" class="form-control" id="hostId" name="hostId" value="" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="messageContent" class="form-label">Message:</label>
-                        <textarea class="form-control" id="messageContent" name="content" rows="5" required></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
-
-                <%
-                    MessageDAO messageDAO = new MessageDAO(database.dbURL, database.dbID, database.dbPassword);
-
-                    if ("POST".equalsIgnoreCase(request.getMethod())) {
-                        String hostIdInput = request.getParameter("hostId");
-                        String content = request.getParameter("content");
-
-                        messageDAO.sendMessage(id, hostIdInput, content);
-                    }
-                %>
-            </div>
         </main>
     </div>
 </div>
