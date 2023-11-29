@@ -11,12 +11,9 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 
 <%
-    // Disable caching headers
     response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
     response.setHeader("Pragma", "no-cache");
     response.setDateHeader("Expires", 0);
-
-    // Invalidate session and redirect using JavaScript to prevent caching issues
     session.invalidate();
 %>
 

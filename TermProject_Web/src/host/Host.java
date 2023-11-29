@@ -7,7 +7,6 @@ public class Host {
     private String email;
     private String phone_num;
 
-    // Constructors
     public Host() {
     }
 
@@ -19,7 +18,6 @@ public class Host {
         this.phone_num = phone_num;
     }
 
-    // Getter and Setter methods
     public String getHost_id() {
         return host_id;
     }
@@ -60,15 +58,4 @@ public class Host {
         this.phone_num = phone_num;
     }
 
-    // toString method (optional)
-    @Override
-    public String toString() {
-        return "Host{" +
-                "host_id='" + host_id + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phone_num='" + phone_num + '\'' +
-                '}';
-    }
 }

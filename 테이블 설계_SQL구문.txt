@@ -69,3 +69,25 @@ CREATE TABLE review (
     FOREIGN KEY (user_id) REFERENCES user(user_id),
     FOREIGN KEY (room_id) REFERENCES room(room_id)
 );
+
+
+추후 작업 
+
+Review에 대해 CASCADE옵션
+
+ALTER TABLE `Term_project`.`review` 
+DROP FOREIGN KEY `review_ibfk_1`,
+DROP FOREIGN KEY `review_ibfk_2`;
+ALTER TABLE `Term_project`.`review` 
+ADD CONSTRAINT `review_ibfk_1`
+  FOREIGN KEY (`user_id`)
+  REFERENCES `Term_project`.`user` (`user_id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+ADD CONSTRAINT `review_ibfk_2`
+  FOREIGN KEY (`room_id`)
+  REFERENCES `Term_project`.`room` (`room_id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+

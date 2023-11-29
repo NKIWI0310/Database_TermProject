@@ -6,16 +6,20 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="user.UserDAO" %>
-<%@ page import="java.io.PrintWriter" %>
+<%@ page import ="host.HostDAO"%>
+<%@ page import ="java.io.PrintWriter" %>
+<%@ page import="contract.ContractDAO" %>
 <% request.setCharacterEncoding("UTF-8"); %>
+<%@ page import="database.database" %>
+<%@ page import="contract.Contract" %>
+<%@ page import="java.util.List" %>
 
-<jsp:useBean id="user" class="user.User" scope="session" />
-<jsp:setProperty name="user" property="user_id" />
-<jsp:setProperty name="user" property="password" />
-<jsp:setProperty name="user" property="email" />
-<jsp:setProperty name="user" property="phone_num" />
-<jsp:setProperty name="user" property="name" />
+<jsp:useBean id="host" class="host.Host" scope="session" />
+<jsp:setProperty name="host" property="host_id" />
+<jsp:setProperty name="host" property="password" />
+<jsp:setProperty name="host" property="email" />
+<jsp:setProperty name="host" property="phone_num" />
+<jsp:setProperty name="host" property="name" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -88,7 +92,7 @@
 </head>
 
 <%
-    String id = user.getUser_id();
+    String id = host.getHost_id();
 %>
 <body>
 
@@ -119,39 +123,64 @@
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                     <li class="nav-item">
-                        <h2>사용자 기능</h2>
+                        <h2>호스트 기능</h2>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="../mainpage/roomlist.jsp">
-                            방 목록 조회
+                        <a class="nav-link active" href="./messageReceive.jsp">
+                            메세지 확인
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="../mainpage/bill.jsp">
-                            청구서 조회
+                        <a class="nav-link active" href="./RoomDelete.jsp">
+                            자신의 방 삭제
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="../mainpage/messageSend.jsp">
-                            메세지 보내기
+                        <a class="nav-link active" href="./contractReceive.jsp">
+                            계약서 확인
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="../mainpage/contractSend.jsp">
-                            계약서 보내기
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="../mainpage/review.jsp">
-                            리뷰 남기기
-                        </a>
-                    </li>
+
                 </ul>
             </div>
         </nav>
+        <%
+            ContractDAO contractDAO = new ContractDAO(database.dbURL, database.dbID, database.dbPassword);
+            List<Contract> contracts = contractDAO.getContractsByHostId(id);
+        %>
 
         <main role="main" class="main-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>호스트가 보유한 계약서 목록</h2>
 
+                        <% if (contracts != null && !contracts.isEmpty()) { %>
+                        <div class="row">
+                            <% for (Contract contract : contracts) { %>
+                            <div class="col-md-4 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">계약서 ID: <%= contract.getContractId() %></h5>
+                                        <p>User ID: <%= contract.getUserId() %></p>
+                                        <p>Room ID: <%= contract.getRoomId() %></p>
+                                        <p>계약일: <%= contract.getContractDate() %></p>
+                                        <p>가격: <%= contract.getPrice() %></p>
+                                        <p>기간: <%= contract.getDuration() %> months</p>
+                                        <p>계약 시작 시간: <%= contract.getStartTime() %></p>
+                                        <p>계약 종료 시간: <%= contract.getEndTime() %></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                        </div>
+                        <% } else { %>
+                        <p>호스트가 보유한 계약서가 없습니다.</p>
+                        <% } %>
+
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </div>

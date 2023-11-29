@@ -49,7 +49,7 @@ public class Contract {
         return roomId;
     }
 
-    public void setRoomId(int hostId) {
+    public void setRoomId(int roomId) {
         this.roomId = roomId;
     }
 

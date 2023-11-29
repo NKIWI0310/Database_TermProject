@@ -10,8 +10,9 @@ public class Message {
     private String content;
     private Date messageTime;
 
-    // Constructors, getters, and setters
+    public Message() {
 
+    }
     public Message(int messageId, String userId, String hostId, String content, Date messageTime) {
         this.messageId = messageId;
         this.userId = userId;
@@ -19,8 +20,6 @@ public class Message {
         this.content = content;
         this.messageTime = messageTime;
     }
-
-    // Getters and Setters
 
     public int getMessageId() {
         return messageId;

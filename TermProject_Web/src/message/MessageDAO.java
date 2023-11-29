@@ -1,6 +1,9 @@
 package message;
 
+import java.awt.*;
 import java.sql.*;
+import java.util.*;
+import java.util.List;
 
 import database.database;
 
@@ -39,5 +42,36 @@ public class MessageDAO {
             System.err.println("SQL State: " + e.getSQLState());
             System.err.println("Error Code: " + e.getErrorCode());
         }
+    }
+
+    public List<Message> getMessagesForHost(String hostId) {
+        List<Message> messages = new ArrayList<>();
+
+        String selectQuery = "SELECT * FROM message WHERE host_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+             PreparedStatement preparedStatement = conn.prepareStatement(selectQuery)) {
+
+            preparedStatement.setString(1, hostId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Message message = new Message();
+                message.setMessageId(resultSet.getInt("message_id"));
+                message.setUserId(resultSet.getString("user_id"));
+                message.setHostId(resultSet.getString("host_id"));
+                message.setContent(resultSet.getString("content"));
+                message.setMessageTime(resultSet.getTimestamp("message_time"));
+
+                messages.add(message);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception appropriately
+        }
+
+        return messages;
     }
 }
